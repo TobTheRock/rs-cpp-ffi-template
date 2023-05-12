@@ -1,5 +1,5 @@
 fn main() {
-    // rerun build when cpp source where cnahge
+    // rerun build when cpp
     println!("cargo:rerun-if-changed=src/cpp/deep_thought.cpp");
 
     // cc compiler, where
@@ -14,5 +14,5 @@ fn main() {
     cxx_build::CFG.exported_header_dirs.push(&pub_include_dir);
 
     cc.file("src/cpp/deep_thought.cpp") // c++ source files which should be build
-        .compile("deep_thought");
+        .compile("rs_cpp_ffi_template");
 }

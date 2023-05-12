@@ -13,6 +13,7 @@ struct DeepThoughtImpl {
 };
 
 DeepThought::DeepThought() : _impl(std::make_unique<DeepThoughtImpl>()) {}
+DeepThought::~DeepThought() {}
 
 std::string DeepThought::ask(const std::string &question) const {
   // the generated bindings support some implicit conversion to rusty types

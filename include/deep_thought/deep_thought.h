@@ -20,6 +20,8 @@ namespace magrathea {
 class DeepThought {
 public:
   DeepThought();
+  // a default destructor together with a unique_ptr with a forward declared type is not possible
+  ~DeepThought();
 
   std::string ask(const std::string &question) const;
 
