@@ -1,5 +1,8 @@
-#include "rs-cpp-ffi-template/include/deep_thought/deep_thought.h"
-#include "rs-cpp-ffi-template/src/bindings.rs.h"
+
+#include "deep_thought/deep_thought.h"
+// TODO corrosions uses a different include...
+// #include "rs-cpp-ffi-template/src/bindings.rs.h"
+#include "deep_thought_ffi/bindings.h"
 
 namespace magrathea {
 

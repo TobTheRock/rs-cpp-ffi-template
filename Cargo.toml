@@ -13,3 +13,8 @@ cxx = "1.0.94"
 
 [build-dependencies]
 cxx-build =  "1.0"
+cc = "1.0.79"
+
+[features]
+default = []
+build_shim = []

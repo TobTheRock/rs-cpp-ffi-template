@@ -1,3 +1,5 @@
+#![allow(dead_code, unused_variables, unused_mut)]
+
 fn main() {
     // rerun build when cpp
     println!("cargo:rerun-if-changed=src/cpp/deep_thought.cpp");
@@ -7,12 +9,15 @@ fn main() {
     // - adds target/cxxbridge to the includes
     let mut cc = cxx_build::bridge("src/bindings.rs");
 
-    // TODO feature flag
-    // #[cfg(feature = "build-with-rust")]
+    #[cfg(feature = "build_shim")]
+    build_shim(&mut cc);
+}
+
+fn build_shim(cc: &mut cc::Build) {
     // Add the public includes
     let pub_include_dir = std::env::current_dir().unwrap().as_path().join("./include");
     cxx_build::CFG.exported_header_dirs.push(&pub_include_dir);
 
     cc.file("src/cpp/deep_thought.cpp") // c++ source files which should be build
-        .compile("rs_cpp_ffi_template");
+        .compile("cpp_shim");
 }
