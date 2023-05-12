@@ -1,7 +1,13 @@
+mod bindings;
+
 pub struct DeepThought {}
 
 impl DeepThought {
-    pub fn ask(question: &str) -> String {
+    pub fn new() -> Self {
+        Self {}
+    }
+
+    pub fn ask(&self, question: &str) -> String {
         println!("Asking deep thought: {}", question);
         // TODO config for this
         let time_to_think_parameter: u64 = question.len().try_into().unwrap_or(0);
