@@ -16,8 +16,8 @@ this already builts (with `build.rs`) a static library including the sources gen
 
 Thus we only need to link against this library and include its headers to build the CLI executable using `CMake` (see `cli/CMakeLists.txt`) with:
 ```
-cmake -S cli/ -B target/cli
-cmake --build target/cli
+cmake -S . -B target/cmake
+cmake --build target/cmake
 ```
 
 ### Shim library built with CMake/Corrosion 
@@ -27,7 +27,8 @@ cargo b
 ```
 
 ```
-cmake -S cli/ -B target/cli -DUSE_CORROSION=1
+cmake -S . -B target/cmake -DBUILD_SHIM=1
+cmake --build target/cmake
 ```
 
 ### Running the CLI

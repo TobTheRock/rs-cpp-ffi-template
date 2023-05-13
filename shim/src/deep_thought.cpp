@@ -24,6 +24,7 @@ std::string DeepThought::ask(const std::string &question) const {
 
   ::rust::String rs_answer = _impl->deep_thought->ask(rs_str);
 
+  // due to the opaque type we need to copy
   std::string answer = std::string{rs_answer.begin(), rs_answer.end()};
 
   return answer;
