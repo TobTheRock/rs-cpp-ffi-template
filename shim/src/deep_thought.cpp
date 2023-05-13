@@ -1,8 +1,12 @@
 
 #include "deep_thought/deep_thought.h"
-// TODO corrosions uses a different include...
-// #include "rs-cpp-ffi-template/src/bindings.rs.h"
+
+// Corrosion renames the generated header file
+#ifdef WITH_CORROSION 
 #include "deep_thought_ffi/bindings.h"
+#else
+#include "rs-cpp-ffi-template/src/bindings.rs.h"
+#endif
 
 namespace magrathea {
 

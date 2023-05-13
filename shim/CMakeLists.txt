@@ -1,24 +1,26 @@
 
 
 # Shim library was already built with Rust
-if(BUILD_SHIM)
+if(NOT BUILD_SHIM)
 message("## Importing prebuilt C++ shim")
 
-add_library(deep_thought_shim STATIC IMPORTED)
+add_library(deep_thought_shim STATIC IMPORTED GLOBAL)
 
 # Note: for release the path will differ
-set_target_properties(deep_thought_shim PROPERTIES IMPORTED_LOCATION ../target/debug/librs_cpp_ffi_template.a)
+set_target_properties(deep_thought_shim PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/target/debug/librs_cpp_ffi_template.a)
+# set_target_properties(deep_thought_shim PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_include_directories(deep_thought_shim INTERFACE include)
+target_include_directories(deep_thought_shim INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 else()
 
 message("### Building and packaging C++ shim with Corrosion")
-add_library(deep_thought_shim STATIC)
+add_library(deep_thought_shim STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/deep_thought.cpp)
+target_include_directories(deep_thought_shim PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-include(FetchContent)
-
+# Download corrosion from the github repo
 # Alternatively one can install corrosion locally
+include(FetchContent)
 FetchContent_Declare(
     Corrosion
     GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
@@ -37,8 +39,8 @@ corrosion_add_cxxbridge(deep_thought_ffi
 )
 target_link_libraries(deep_thought_shim PUBLIC deep_thought_ffi)
 
-# add shim source
-target_sources(deep_thought_shim PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/deep_thought.cpp)
-target_include_directories(deep_thought_shim PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# only needed since corrosion renames the generated headers and we have to differentiate
+target_compile_options(deep_thought_shim PRIVATE -DWITH_CORROSION)
 
 endif()

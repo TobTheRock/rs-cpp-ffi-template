@@ -22,9 +22,6 @@ cmake --build target/cmake
 
 ### Shim library built with CMake/Corrosion 
 https://github.com/corrosion-rs/corrosion
-```
-cargo b
-```
 
 ```
 cmake -S . -B target/cmake -DBUILD_SHIM=1
@@ -34,6 +31,6 @@ cmake --build target/cmake
 ### Running the CLI
 Just execute
 ```
-./target/cli/deep_thought_cli
+./target/cmake/cli/deep_thought_cli
 ```
 and prompt your question which `DeepThought™` will gladly answer.
