@@ -11,16 +11,15 @@
 #include <memory>
 #include <string>
 
-namespace rs_ffi {
-struct DeepThought;
-}
+#include "IBootLoader.h"
 
 namespace magrathea {
 
 class DeepThought {
 public:
-  DeepThought();
-  // a default destructor together with a unique_ptr with a forward declared type is not possible
+  explicit DeepThought(const std::shared_ptr<IBootLoader>& boot_loader);
+  // a default destructor together with a unique_ptr having
+  // a forward declared type is not possible
   ~DeepThought();
 
   std::string ask(const std::string &question) const;

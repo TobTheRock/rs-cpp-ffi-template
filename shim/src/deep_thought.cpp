@@ -2,7 +2,7 @@
 #include "deep_thought/deep_thought.h"
 
 // Corrosion renames the generated header file
-#ifdef WITH_CORROSION 
+#ifdef WITH_CORROSION
 #include "deep_thought_ffi/bindings.h"
 #else
 #include "rs-cpp-ffi-template/src/bindings.rs.h"
@@ -14,12 +14,14 @@ namespace magrathea {
 // this is needed when we want to hide the generated rust::Box type
 // Beeing opaque, we can't simply put ffi::RsDeepThought in a unique_ptr
 struct DeepThoughtImpl {
-  DeepThoughtImpl() : deep_thought(ffi::create_deep_thought()) {}
+  DeepThoughtImpl(const std::shared_ptr<IBootLoader>& boot_loader)
+      : deep_thought(ffi::create_deep_thought(boot_loader)) {}
 
   ::rust::Box<ffi::RsDeepThought> deep_thought;
 };
 
-DeepThought::DeepThought() : _impl(std::make_unique<DeepThoughtImpl>()) {}
+DeepThought::DeepThought(const std::shared_ptr<IBootLoader> &boot_loader)
+    : _impl(std::make_unique<DeepThoughtImpl>(boot_loader)) {}
 DeepThought::~DeepThought() {}
 
 std::string DeepThought::ask(const std::string &question) const {

@@ -37,6 +37,8 @@ corrosion_add_cxxbridge(deep_thought_ffi
         CRATE rs-cpp-ffi-template
         FILES bindings.rs
 )
+target_include_directories(deep_thought_ffi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 target_link_libraries(deep_thought_shim PUBLIC deep_thought_ffi)
 
 

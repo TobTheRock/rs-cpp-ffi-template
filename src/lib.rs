@@ -8,7 +8,7 @@ impl DeepThought {
     }
 
     pub fn ask(&self, question: &str) -> String {
-        println!("RS: Asking deep thought: {}", question);
+        println!("RS: Asking DeepThought™: {}", question);
         // TODO config for this
         let time_to_think_parameter: u64 = question.len().try_into().unwrap_or(0);
 
