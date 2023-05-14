@@ -15,8 +15,11 @@ namespace magrathea {
 // Beeing opaque, we can't simply put ffi::RsDeepThought in a unique_ptr
 struct DeepThoughtImpl {
   DeepThoughtImpl(const std::shared_ptr<IBootLoader>& boot_loader)
-      : deep_thought(ffi::create_deep_thought(boot_loader)) {}
+      : 
+      config({.clock_rate = 400, .version = "1.0.1"}),
+      deep_thought(ffi::create_deep_thought(boot_loader, config)) {}
 
+  ::ffi::Config config;
   ::rust::Box<ffi::RsDeepThought> deep_thought;
 };
 
