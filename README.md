@@ -44,3 +44,9 @@ Just execute
 ./target/cmake/cli/deep_thought_cli
 ```
 and prompt your question which `DeepThought™` will gladly answer.
+
+# Challenges
+- async rust
+  - cxx is working on coroutine support
+- generics not supported
+- linker issues
